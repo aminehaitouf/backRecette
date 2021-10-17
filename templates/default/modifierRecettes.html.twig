@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="shortcut icon" type="image/png" href="{{asset('admin/assets/images/icon/favicon.ico')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/metisMenu.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/slicknav.min.css')}}">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all"/>
+    <!-- others css -->
+    <link rel="stylesheet" href="{{asset('admin/assets/css/typography.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/default-css.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/responsive.css')}}">
+    <!-- modernizr css -->
+    <script src="{{asset('admin/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+{% endblock %}
+{% block body %}
+            <!-- page title area end -->
+            <div class="main-content-inner">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Textual inputs start -->
+                            <div class="col-12 mt-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 >Les details du Produit</h4>
+                                        
+                                        
+                           {% form_theme form 'bootstrap_4_layout.html.twig' %}             
+                    {{ form_start(form)}}
+                          
+                          
+                          <div class="form-group">
+                              <label for="message-text" class="col-form-label">Titre:</label>
+                              {{form_widget(form.titre, {attr:{value:recette.titre  }})}}
+                          </div>
+                          <div class="form-group">
+                              <label for="message-text" class="col-form-label">Sous Titre (facultatif):</label>
+                              {{form_widget(form.sousTitre, {attr:{value:recette.sousTitre  }})}}
+                          </div>
+                          <div class="form-group">
+                            <label for="example-search-input" class="col-form-label">Ingredients</label>
+                            {{form_widget(form.ingredients)}}
+                        </div>
+                         
+                          
+                          <div class="form-group">
+                              <button type="submit" id="checkout-butto" class="btn btn-primary">Modifier Recettes</button>
+                        </div>
+                     {{ form_end(form)}}
+
+                        <div style="text-align: center;">
+							<button type="button" style="margin-top: 10px;width: 50%;" class="btn btn-outline-primary btn-round mr-md-3 mb-md-0 mb-2" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Ajouter ingredient</button>
+						</div>
+
+						<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Ajout du ingredient</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										{{ form_start(formingredient)}}
+										
+										
+										<div class="form-group">
+											<label for="recipient-name" class="col-form-label">Titre :</label>
+											{{form_widget(formingredient.titre)}}
+										</div>
+										
+										
+										<div class="modal-footer">
+											<button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+											<button type="submit" id="checkout-butto" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo2">Ajouter</button>
+										</div>
+										
+										{{ form_end(formingredient)}}
+									</div>
+								</div>
+							</div>
+						</div>
+
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                          
+
+                            <!-- button with dropdown end -->
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <!-- main content area end -->
+    {% endblock %}
+   {% block javascripts %}
+    <script src="{{asset('admin/assets/js/vendor/jquery-2.2.4.min.js')}}"></script>
+    <!-- bootstrap 4 js -->
+    <script src="{{asset('admin/assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/metisMenu.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/jquery.slicknav.min.js')}}"></script>
+
+    <!-- others plugins -->
+    <script src="{{asset('admin/assets/js/plugins.js')}}"></script>
+    <script src="{{asset('admin/assets/js/scripts.js')}}"></script>
+   
+<script >$("input[type=file]").change(function () {
+        var files = [];
+        for (var i = 0; i < $(this)[0].files.length; i++) {
+            files.push($(this)[0].files[i].name);
+        }
+        $(this).next('.custom-file-label').html(files.join(', '));
+    });
+    </script>
+{% endblock %}

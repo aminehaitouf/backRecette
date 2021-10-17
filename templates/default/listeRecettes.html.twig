@@ -1,0 +1,130 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+
+	<link rel="shortcut icon" type="image/png" href="{{asset('admin/assets/images/icon/favicon.ico')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/themify-icons.css')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/metisMenu.css')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/owl.carousel.min.css')}}">
+	<link
+	rel="stylesheet" href="{{asset('admin/assets/css/slicknav.min.css')}}">
+	<!-- amcharts css -->
+	<link
+	rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all"/>
+	<!-- Start datatable css -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+	<link
+	rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+	<!-- style css -->
+	<link rel="stylesheet" href="{{asset('admin/assets/css/typography.css')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/default-css.css')}}">
+	<link rel="stylesheet" href="{{asset('admin/assets/css/styles.css')}}">
+	<link
+	rel="stylesheet" href="{{asset('admin/assets/css/responsive.css')}}">
+	<!-- modernizr css -->
+	<script src="{{asset('admin/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="main-content-inner">
+		<div
+			class="row">
+			<!-- Dark table start -->
+			<div class="col-12 mt-5">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="header-title">List de recettes</h4>
+						</br>
+						<a class="btn btn-success" href="/acceuil/new">Ajouter Recettes</a>
+
+
+						<div class="data-tables datatable-dark">
+							<table id="dataTable3" class="text-center">
+								<thead class="text-capitalize">
+									<tr>
+										<th>Titre</th>
+										<th>sous titre</th>
+										<th>Ingredient</th>
+										<th>Options</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										{% if recettes != null %}
+											{% for recette in recettes %}
+												<tr>
+													<td>{{recette.titre}}</td>
+													<td>{{recette.sousTitre}}</td>
+													<td>
+														{% for ingredient in recette.ingredients %}
+															{{ingredient.titre}}</br>
+														{% endfor %}
+													</td>
+													<td>
+														<a class="btn btn-warning" href="/acceuil/{{recette.id}}/edit">Modifier</a>
+														<a class="btn btn-danger" href="/acceuil/{{recette.id}}/delete">Supprimer</a>
+													</td>
+												</tr>
+											{% endfor %}
+										{% else %}
+											Aucune Recettes
+										{% endif %}
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Dark table end -->
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+
+	<!-- offset area end -->
+	<!-- jquery latest version --><script src="{{asset('admin/assets/js/vendor/jquery-2.2.4.min.js')}}"> </script>
+	<!-- bootstrap 4 js -->
+	<script src="{{asset('admin/assets/js/popper.min.js')}}"></script>
+	<script src="{{asset('admin/assets/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('admin/assets/js/owl.carousel.min.js')}}"></script>
+	<script src="{{asset('admin/assets/js/metisMenu.min.js')}}"></script>
+	<script src="{{asset('admin/assets/js/jquery.slimscroll.min.js')}}"></script>
+	<script src="{{asset('admin/assets/js/jquery.slicknav.min.js')}}"></script>
+
+	<!-- Start datatable js -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+		<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+	<!-- others plugins -->
+	<script src="{{asset('admin/assets/js/plugins.js')}}"></script>
+	<script src="{{asset('admin/assets/js/scripts.js')}}"></script>
+				<script>
+				$(document).ready( function() {
+			if ( $.fn.DataTable.isDataTable( '#dataTable3' ) ) {
+				$( '#dataTable3' ).DataTable().destroy();
+			}
+			$( '#dataTable3' ).dataTable( {
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+				},
+				rowReorder: {
+				selector: 'td:nth-child(2)'
+				},
+        		responsive: true,
+				"bSort": false,
+				"bDestroy": true
+			} );
+			} );
+
+				</script>
+{% endblock %}
